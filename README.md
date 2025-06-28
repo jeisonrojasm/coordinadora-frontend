@@ -1,6 +1,7 @@
 <p align="center">
   <img src="https://coordinadora.com/wp-content/uploads/2023/03/logo-coordinadora.svg" width="500" alt="Coordinadora logo" />
 </p>
+
 # Coordinadora Frontend
 
 Aplicación React para registrar, cotizar y rastrear envíos.
