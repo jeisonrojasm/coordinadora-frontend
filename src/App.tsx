@@ -8,10 +8,12 @@ function App() {
   return (
     <>
       <DataProvider>
-        <Routes>
-          <Route path="/" element={<Navigate to="/sign-in" replace />} />
-          <Route path="/sign-in" element={<SignIn />} />
-        </Routes>
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Navigate to="/sign-in" replace />} />
+            <Route path="/sign-in" element={<SignIn />} />
+          </Routes>
+        </div>
       </DataProvider>
     </>
   )
