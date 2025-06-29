@@ -1,0 +1,12 @@
+.input__subtitle {
+  font-size: var(--font-size2);
+  padding-bottom: 1.5rem;
+}
+
+.input {
+  font-size: var(--font-size3);
+  width: 100%;
+  padding: 2rem;
+  border-radius: 3rem;
+  font-family: var(--font-main);
+}

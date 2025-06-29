@@ -1,0 +1,21 @@
+:root {
+  --color1: #1063ac;
+  --color2: #ffffff;
+  --color3: #f05a28;
+  --color4: #00adee;
+  --color5: #e0e6e9;
+  --color6: #f1742b;
+  --color7: #000000;
+  --color8: #3b3b3b;
+  --font-main: 'Montserrat', sans-serif;
+  --font-size1: 5rem; 
+  --font-size2: 3rem;
+  --font-size3: 2.3rem;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color5);
+}
