@@ -1,6 +1,10 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface Data {
+  email: string
+  lastname: string,
+  name: string,
+  userId: string
 }
 
 export interface DataContextType {
