@@ -7,7 +7,8 @@ export const Input: React.FC<InputProps> = ({
   onChange,
   onBlur,
   placeholder = 'Escribe aquí...',
-  label
+  label,
+  value
 }) => {
   return (
     <>
@@ -22,6 +23,7 @@ export const Input: React.FC<InputProps> = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 placeholder={placeholder}
+                value={value}
               />
             </>
           )
@@ -31,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
               onChange={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
+              value={value}
             />
           )
       }
