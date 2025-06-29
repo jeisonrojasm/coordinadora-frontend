@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { SignIn } from './SignIn'
 
 // Test suite del componente SignIn
@@ -49,4 +49,85 @@ describe('vista SignIn', () => {
     expect(paragraph).toBeInTheDocument()
     expect(registerLink).toBeInTheDocument()
   })
+
+  test('debe mostrar error si la contraseña tiene menos de 8 caracteres', async () => {
+    render(<SignIn />)
+
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu correo'), {
+      target: { value: 'correo@valido.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu contraseña'), {
+      target: { value: 'Ab1!' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'Iniciar sesión' }))
+
+    const modalMessage = await screen.findByText('La contraseña debe tener al menos 8 caracteres')
+    expect(modalMessage).toBeInTheDocument()
+  })
+
+  test('debe mostrar error si la contraseña no tiene una letra mayúscula', async () => {
+    render(<SignIn />)
+
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu correo'), {
+      target: { value: 'correo@valido.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu contraseña'), {
+      target: { value: 'abc123!!' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'Iniciar sesión' }))
+
+    const modalMessage = await screen.findByText('Debe contener al menos una letra mayúscula')
+    expect(modalMessage).toBeInTheDocument()
+  })
+
+  test('debe mostrar error si la contraseña no tiene una letra minúscula', async () => {
+    render(<SignIn />)
+
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu correo'), {
+      target: { value: 'correo@valido.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu contraseña'), {
+      target: { value: 'ABC123!!' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'Iniciar sesión' }))
+
+    const modalMessage = await screen.findByText('Debe contener al menos una letra minúscula')
+    expect(modalMessage).toBeInTheDocument()
+  })
+
+  test('debe mostrar error si la contraseña no tiene un número', async () => {
+    render(<SignIn />)
+
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu correo'), {
+      target: { value: 'correo@valido.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu contraseña'), {
+      target: { value: 'Abcdef!!' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'Iniciar sesión' }))
+
+    const modalMessage = await screen.findByText('Debe contener al menos un número')
+    expect(modalMessage).toBeInTheDocument()
+  })
+
+  test('debe mostrar error si la contraseña no tiene un carácter especial', async () => {
+    render(<SignIn />)
+
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu correo'), {
+      target: { value: 'correo@valido.com' },
+    })
+    fireEvent.change(screen.getByPlaceholderText('Ingresa tu contraseña'), {
+      target: { value: 'Abcdef12' },
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'Iniciar sesión' }))
+
+    const modalMessage = await screen.findByText('Debe contener al menos un carácter especial')
+    expect(modalMessage).toBeInTheDocument()
+  })
+
 })
