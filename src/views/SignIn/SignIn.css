@@ -1,0 +1,50 @@
+.signin {
+  flex: 1;
+  background-color: var(--color1);
+  font-family: var(--font-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin__form {
+  background-color: var(--color2);
+  display: inline-block;
+  padding: 6rem;
+  border-radius: 1.5rem;
+}
+
+.signin__title {
+  font-size: var(--font-size1);
+}
+
+.signin__title--first,
+.signin__title--second {
+  margin: 5rem 0;
+  text-align: center;
+}
+
+.signin__input-container {
+  padding: 1rem 0 2.5rem 0;
+}
+
+.signin__not-registered-p {
+  font-size: var(--font-size3);
+  color: var(--color8);
+}
+
+.signin__not-registered-p--link {
+  color: var(--color3);
+}
+
+.signin__not-registered-p--link:hover {
+  color: var(--color6);
+  cursor: pointer;
+}
+
+.signin__footer-info {
+  margin: 8rem 0 2rem 0;
+  display: flex;
+  justify-content: center;
+}
