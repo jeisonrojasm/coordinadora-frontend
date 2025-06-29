@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 export const SignIn = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
   const [showModal, handleShow, handleClose] = useModal()
   const [modalMessage, setModalMessage] = useState<string>('')
 
@@ -61,7 +62,7 @@ export const SignIn = () => {
         />
         <div className="signin__footer-info">
           <p className="signin__not-registered-p">
-            ¿No te encuentras registrado aún? <span className="signin__not-registered-p--link">Regístrate</span>
+            ¿No te encuentras registrado aún? <span className="signin__not-registered-p--link" onClick={() => navigate('../sign-up')}>Regístrate</span>
           </p>
         </div>
       </form>
