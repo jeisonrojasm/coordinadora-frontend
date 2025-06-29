@@ -5,12 +5,14 @@ import { Input } from '../../components/Input/Input'
 import { Modal } from '../../components/Modal/Modal'
 import { useModal } from '../../hooks/useModal'
 import './SignUp.css'
+import { onSignUpSubmit } from './SignUpFunctions'
 
 export const SignUp = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [lastname, setLastname] = useState<string>('')
+  const [successfullyRegistered, setSuccessfullyRegistered] = useState<boolean>(false)
 
   const navigate = useNavigate()
 
@@ -27,7 +29,15 @@ export const SignUp = () => {
         </span>
       </header>
       <div className="signup__form-container">
-        <form className="signup__form">
+        <form className="signup__form"
+          onSubmit={(e) => onSignUpSubmit(
+            e,
+            { name, lastname, email, password },
+            handleShow,
+            setModalMessage,
+            setSuccessfullyRegistered
+          )}
+        >
           <h2 className="signup__title signup__title--first">
             Coordinadora Mercantil S.A
           </h2>
@@ -64,7 +74,7 @@ export const SignUp = () => {
           <div className="signup__input-container">
             <Input
               label='Contraseña'
-              type='email'
+              type='password'
               placeholder='Ingresa tu contraseña'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +95,13 @@ export const SignUp = () => {
         <Modal.Buttons>
           <Button
             text='Ok'
-            onClick={handleClose}
+            onClick={() => {
+              if (successfullyRegistered) {
+                navigate('../sign-in')
+              } else {
+                handleClose()
+              }
+            }}
           />
         </Modal.Buttons>
       </Modal>
