@@ -8,7 +8,8 @@ export const DataProvider = ({ children }: DataProviderProps) => {
     email: '',
     lastname: '',
     name: '',
-    userId: ''
+    userId: '',
+    cities: []
   })
 
   return (

@@ -1,41 +1,60 @@
-const VITE_HOST = import.meta.env.VITE_HOST || 'http://localhost:3000'
+import { request } from './request'
 
-export const loginUser = async (body: object) => {
-  try {
-    const response = await fetch(
-      `${VITE_HOST}/auth/login`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      }
-    )
-
-    const json = response.json()
-    return json
-  } catch (error) {
-    console.error('Error en loginUser:', error)
-  }
+export const loginUser = (
+  body: object
+) => {
+  return request({
+    method: 'POST',
+    endpoint: '/auth/login',
+    body
+  })
 }
 
-export const registerUser = async (body: object) => {
-  try {
-    const response = await fetch(
-      `${VITE_HOST}/auth/register`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      }
-    )
+export const registerUser = (
+  body: object,
+) => {
+  return request({
+    method: 'POST',
+    endpoint: '/auth/register',
+    body
+  })
+}
 
-    const json = response.json()
-    return json
-  } catch (error) {
-    console.error('Error en registerUser:', error)
-  }
+export const getAllCities = () => {
+  return request({
+    method: 'GET',
+    endpoint: '/city/getAll'
+  })
+}
+
+export const calculateQuote = (
+  body: object,
+  token: string,
+  handleShow?: () => void,
+  setModalMessage?: (msg: string) => void
+) => {
+  return request({
+    method: 'POST',
+    endpoint: '/quote',
+    body,
+    token,
+    handleShow,
+    setModalMessage
+  })
+}
+
+export const createShipment = (
+  body: object,
+  token: string,
+  handleShow?: () => void,
+  setModalMessage?: (msg: string) => void
+) => {
+  return request({
+    method: 'POST',
+    endpoint: '/shipment',
+    body,
+    token,
+    handleShow,
+    setModalMessage
+  })
 }
