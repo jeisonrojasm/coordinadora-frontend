@@ -1,0 +1,60 @@
+.quote-shipping {
+  flex: 1;
+  font-family: var(--font-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem;
+}
+
+.quote-shipping__form {
+  background-color: var(--color2);
+  display: inline-block;
+  padding: 6rem;
+  border-radius: 1.5rem;
+}
+
+.quote-shipping__title {
+  font-size: var(--font-size1);
+}
+
+.quote-shipping__title--first,
+.quote-shipping__title--second {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.quote-shipping__input-container {
+  padding: 1rem 0 2.5rem 0;
+}
+
+.quote-shipping__select {
+  font-size: var(--font-size3);
+  width: 100%;
+  padding: 2rem;
+  border-radius: 3rem;
+  font-family: var(--font-main);
+}
+
+.quote-shipping__price {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: var(--font-size3);
+  color: var(--color4);
+  text-align: center;
+  padding: 3rem 0;
+  border: 4px dashed transparent;
+  border-image: repeating-linear-gradient(90deg, var(--color4) 0 10px, transparent 10px 20px) 10;
+  animation: move-dash 1s linear infinite;
+}
+
+@keyframes move-dash {
+  0% {
+    border-image-source: repeating-linear-gradient(90deg, var(--color4) 0 10px, transparent 10px 20px);
+  }
+
+  100% {
+    border-image-source: repeating-linear-gradient(90deg, var(--color4) 10px 20px, transparent 20px 30px);
+  }
+}

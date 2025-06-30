@@ -2,7 +2,7 @@ import type { FormEvent } from 'react'
 import type { NavigateFunction } from 'react-router-dom'
 import type { DataContextType } from '../../context/DataContextTypes'
 import { setAuthToken } from '../../utils/functions'
-import { loginUser } from '../../utils/queries'
+import { getAllCities, loginUser } from '../../utils/queries'
 import { signInSchema } from './SignInSchemas'
 import type { SignInData } from './SignInTypes'
 
@@ -25,24 +25,32 @@ export const onSignInSubmit = async (
 
   if (!result.success) {
     const formatted = result.error.format()
-    if (formatted.email?._errors[0]) showModalError(formatted.email._errors[0])
     if (formatted.password?._errors[0]) showModalError(formatted.password._errors[0])
+    if (formatted.email?._errors[0]) showModalError(formatted.email._errors[0])
   } else {
-    const json = await loginUser(data)
+    const jsonLoginUser = await loginUser(data)
 
-    if (!json.success) {
-      if (json.body.message.includes('WRONG_CREDENTIALS')) {
+    if (!jsonLoginUser.success) {
+      if (jsonLoginUser.body.message.includes('WRONG_CREDENTIALS')) {
         return showModalError('Las credenciales que ingresaste son incorrectas o el usuario no existe.')
-      } else if (json.body.message.includes('TOO_MANY_LOGIN_ATTEMPTS')) {
+      } else if (jsonLoginUser.body.message.includes('TOO_MANY_LOGIN_ATTEMPTS')) {
         return showModalError('Has superado el máximo de intentos permitidos. Intenta nuevamente en 1 minuto.')
       } else {
         return showModalError('¡Ups! Ocurrió un error inesperado')
       }
     } else {
-      const token = json.body.token
+      const token = jsonLoginUser.body.token
       setAuthToken(token)
 
-      const user = json.body.user
+      const user = jsonLoginUser.body.user
+
+      const jsonGetCities = await getAllCities()
+
+      if (!jsonGetCities.success || !Array.isArray(jsonGetCities.body)) {
+        return showModalError('No se pudieron obtener las ciudades. Intenta nuevamente más tarde.')
+      }
+
+      const cities = jsonGetCities.body
 
       if (dataContext) {
         dataContext.setData({
@@ -50,7 +58,8 @@ export const onSignInSubmit = async (
           email: user.email,
           lastname: user.lastname,
           name: user.name,
-          userId: user.userId
+          userId: user.userId,
+          cities
         })
 
         navigate('../dashboard')

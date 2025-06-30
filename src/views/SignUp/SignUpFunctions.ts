@@ -21,8 +21,8 @@ export const onSignUpSubmit = async (
 
   if (!result.success) {
     const formatted = result.error.format()
-    if (formatted.email?._errors[0]) showModalError(formatted.email._errors[0])
     if (formatted.password?._errors[0]) showModalError(formatted.password._errors[0])
+    if (formatted.email?._errors[0]) showModalError(formatted.email._errors[0])
   } else {
 
     const json = await registerUser(data)
