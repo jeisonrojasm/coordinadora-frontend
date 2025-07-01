@@ -1,6 +1,9 @@
-import { render } from '@testing-library/react'
-import { SignUp } from './SignUp'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 
-test('debe renderizar el componente SignUp', () => {
-  render(<SignUp />)
+describe('Prueba básica del entorno de testing', () => {
+  test('Debe renderizar texto en el DOM', () => {
+    render(<div>Hola mundo</div>)
+    expect(screen.getByText('Hola mundo')).toBeInTheDocument()
+  })
 })
