@@ -1,6 +1,6 @@
-import { clearAuthToken } from './functions'
+import { clearAuthToken, getViteHost } from './functions'
 
-const VITE_HOST = import.meta.env.VITE_HOST || 'http://localhost:3000'
+const VITE_HOST = getViteHost()
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'

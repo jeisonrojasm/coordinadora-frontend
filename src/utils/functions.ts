@@ -27,3 +27,13 @@ export const formatDate = (isoDate: string): string => {
 
   return `${day}/${capitalizedMonth}/${year} ${time}`
 }
+
+export const getViteHost = (): string => {
+  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_HOST) {
+    return import.meta.env.VITE_HOST
+  } else if (typeof process !== 'undefined' && process.env?.VITE_HOST) {
+    return process.env.VITE_HOST
+  } else {
+    return 'http://localhost:3000'
+  }
+}

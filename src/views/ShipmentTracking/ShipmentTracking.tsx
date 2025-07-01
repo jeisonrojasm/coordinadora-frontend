@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
 import { DataContext } from '../../context/DataContext'
-import { formatDate, getAuthToken } from '../../utils/functions'
+import { formatDate, getAuthToken, getViteHost } from '../../utils/functions'
 import { getUserShipments } from '../../utils/queries'
 import './ShipmentTracking.css'
-import type { Shipment } from './ShipmentTrackingTypes'
-import { io } from 'socket.io-client'
 import { onUpdateShipmentStatusChange } from './ShipmentTrackingFunctions'
+import type { Shipment } from './ShipmentTrackingTypes'
 
-const VITE_HOST = import.meta.env.VITE_HOST || 'http://localhost:3000'
+const VITE_HOST = getViteHost()
+
 const socket = io(VITE_HOST)
 
 export const ShipmentTracking = () => {
