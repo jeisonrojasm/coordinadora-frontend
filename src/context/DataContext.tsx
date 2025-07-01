@@ -9,7 +9,8 @@ export const DataProvider = ({ children }: DataProviderProps) => {
     lastname: '',
     name: '',
     userId: '',
-    cities: []
+    cities: [],
+    status: [],
   })
 
   return (

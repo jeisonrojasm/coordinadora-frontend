@@ -5,12 +5,18 @@ export interface Data {
   lastname: string,
   name: string,
   userId: string
-  cities: City[]
+  cities: City[],
+  status: Status[],
 }
 
 export interface City {
   cityId: number
   cityName: string
+}
+
+export interface Status {
+  statusId: number
+  statusName: string
 }
 
 export interface DataContextType {

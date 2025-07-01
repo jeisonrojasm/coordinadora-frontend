@@ -3,6 +3,7 @@ import './App.css'
 import { MainLayout } from './components/MainLayout/MainLayout'
 import { DataProvider } from './context/DataContext'
 import { QuoteShipping } from './views/QuoteShipping/QuoteShipping'
+import { ShipmentTracking } from './views/ShipmentTracking/ShipmentTracking'
 import { SignIn } from './views/SignIn/SignIn'
 import { SignUp } from './views/SignUp/SignUp'
 
@@ -19,7 +20,7 @@ function App() {
             <Route path="/dashboard" element={<MainLayout />}>
               <Route index element={<Navigate to="quote-shipping" replace />} />
               <Route path="quote-shipping" element={<QuoteShipping />} />
-              <Route path="shipment-tracking" element={<h1>Seguimiento de envíos</h1>} />
+              <Route path="shipment-tracking" element={<ShipmentTracking />} />
             </Route>
           </Routes>
         </div>

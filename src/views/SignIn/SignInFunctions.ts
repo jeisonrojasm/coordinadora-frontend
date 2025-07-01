@@ -2,7 +2,7 @@ import type { FormEvent } from 'react'
 import type { NavigateFunction } from 'react-router-dom'
 import type { DataContextType } from '../../context/DataContextTypes'
 import { setAuthToken } from '../../utils/functions'
-import { getAllCities, loginUser } from '../../utils/queries'
+import { getAllCities, getAllStatus, loginUser } from '../../utils/queries'
 import { signInSchema } from './SignInSchemas'
 import type { SignInData } from './SignInTypes'
 
@@ -45,12 +45,18 @@ export const onSignInSubmit = async (
       const user = jsonLoginUser.body.user
 
       const jsonGetCities = await getAllCities()
+      const jsonGetStatus = await getAllStatus()
 
       if (!jsonGetCities.success || !Array.isArray(jsonGetCities.body)) {
         return showModalError('No se pudieron obtener las ciudades. Intenta nuevamente más tarde.')
       }
 
+      if (!jsonGetStatus.success || !Array.isArray(jsonGetStatus.body)) {
+        return showModalError('No se pudieron obtener los estados. Intenta nuevamente más tarde.')
+      }
+
       const cities = jsonGetCities.body
+      const status = jsonGetStatus.body
 
       if (dataContext) {
         dataContext.setData({
@@ -59,7 +65,8 @@ export const onSignInSubmit = async (
           lastname: user.lastname,
           name: user.name,
           userId: user.userId,
-          cities
+          cities,
+          status
         })
 
         navigate('../dashboard')
