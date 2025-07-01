@@ -29,11 +29,15 @@ export const formatDate = (isoDate: string): string => {
 }
 
 export const getViteHost = (): string => {
+  // Vite runtime
   if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_HOST) {
     return import.meta.env.VITE_HOST
-  } else if (typeof process !== 'undefined' && process.env?.VITE_HOST) {
-    return process.env.VITE_HOST
-  } else {
-    return 'http://localhost:3000'
   }
+
+  // Jest u otros entornos
+  if (typeof process !== 'undefined' && process.env?.VITE_HOST) {
+    return process.env.VITE_HOST
+  }
+
+  return 'http://localhost:3000'
 }
