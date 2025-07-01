@@ -2,9 +2,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "module": "CommonJS",
+    "module": "ES2020",
     "esModuleInterop": true,
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "include": [
     "src/**/*.test.ts",
