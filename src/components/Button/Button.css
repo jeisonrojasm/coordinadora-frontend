@@ -1,0 +1,27 @@
+.button {
+  font-size: var(--font-size3);
+  border-radius: 3rem;
+  font-family: var(--font-main);
+  background-color: var(--color3);
+  color: var(--color2);
+  border: none;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--color6);
+}
+
+.button:disabled {
+  background-color: var(--color3);
+  cursor: not-allowed;
+}
+
+.button--full-width {
+  width: 100%;
+  padding: 2rem;
+}
+
+.button--no-full-width {
+  padding: 2rem 5rem;
+}
