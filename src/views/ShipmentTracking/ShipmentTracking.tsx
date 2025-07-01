@@ -5,6 +5,7 @@ import { getUserShipments } from '../../utils/queries'
 import './ShipmentTracking.css'
 import type { Shipment } from './ShipmentTrackingTypes'
 import { io } from 'socket.io-client'
+import { onUpdateShipmentStatusChange } from './ShipmentTrackingFunctions'
 
 const VITE_HOST = import.meta.env.VITE_HOST || 'http://localhost:3000'
 const socket = io(VITE_HOST)
@@ -14,7 +15,6 @@ export const ShipmentTracking = () => {
   const userId = dataContext?.data.userId
 
   const [shipments, setShipments] = useState<Shipment[]>([])
-  const [selectedStatuses, setSelectedStatuses] = useState<{ [shipmentId: string]: string }>({})
 
   const status = dataContext?.data.status
 
@@ -115,13 +115,8 @@ export const ShipmentTracking = () => {
                 <div>
                   <p>Cambiar estado</p>
                   <select
-                    value={selectedStatuses[shipment.shipment_id] || ''}
-                    onChange={e =>
-                      setSelectedStatuses(prev => ({
-                        ...prev,
-                        [shipment.shipment_id]: e.target.value
-                      }))
-                    }
+                    value=""
+                    onChange={e => onUpdateShipmentStatusChange(e, shipment)}
                   >
                     <option value="" disabled>
                       Selecciona el estado

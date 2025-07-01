@@ -81,3 +81,19 @@ export const getAllStatus = () => {
     endpoint: '/status/getAll'
   })
 }
+
+export const updateShipmentStatus = (
+  body: object,
+  token: string,
+  handleShow?: () => void,
+  setModalMessage?: (msg: string) => void
+) => {
+  return request({
+    method: 'PATCH',
+    endpoint: '/shipment/status',
+    body,
+    token,
+    handleShow,
+    setModalMessage
+  })
+}
