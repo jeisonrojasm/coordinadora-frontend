@@ -74,3 +74,10 @@ export const getUserShipments = (
     setModalMessage
   })
 }
+
+export const getAllStatus = () => {
+  return request({
+    method: 'GET',
+    endpoint: '/status/getAll'
+  })
+}

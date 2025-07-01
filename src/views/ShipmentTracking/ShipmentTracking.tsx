@@ -4,16 +4,42 @@ import { formatDate, getAuthToken } from '../../utils/functions'
 import { getUserShipments } from '../../utils/queries'
 import './ShipmentTracking.css'
 import type { Shipment } from './ShipmentTrackingTypes'
+import { io } from 'socket.io-client'
+
+const VITE_HOST = import.meta.env.VITE_HOST || 'http://localhost:3000'
+const socket = io(VITE_HOST)
 
 export const ShipmentTracking = () => {
   const dataContext = useContext(DataContext)
+  const userId = dataContext?.data.userId
+
   const [shipments, setShipments] = useState<Shipment[]>([])
+  const [selectedStatuses, setSelectedStatuses] = useState<{ [shipmentId: string]: string }>({})
+
+  const status = dataContext?.data.status
 
   useEffect(() => {
+    socket.emit('joinRoom', userId)
+
+    const handleShipmentUpdate = (updatedShipment: Shipment) => {
+      setShipments(prev =>
+        prev.map((shipment) => {
+          return shipment.shipment_id === updatedShipment.shipment_id
+            ? {
+              ...shipment,
+              status_name: updatedShipment.status_name,
+              changed_at: updatedShipment.changed_at
+            }
+            : shipment
+        })
+      )
+    }
+
+    socket.on('shipmentStatusUpdated', handleShipmentUpdate)
+
     const fetchUserShipments = async () => {
       try {
         const token = getAuthToken()
-        const userId = dataContext?.data.userId
 
         if (!userId || !token) {
           console.error('userId o token no están definidos, no se puede obtener envíos.')
@@ -31,6 +57,10 @@ export const ShipmentTracking = () => {
     }
 
     fetchUserShipments()
+
+    return () => {
+      socket.off('shipmentStatusUpdated', handleShipmentUpdate)
+    }
   }, [dataContext?.data.userId])
 
   return (
@@ -84,12 +114,27 @@ export const ShipmentTracking = () => {
               <div className="shipment-tracking__item--centered">
                 <div>
                   <p>Cambiar estado</p>
-                  <select id="">
+                  <select
+                    value={selectedStatuses[shipment.shipment_id] || ''}
+                    onChange={e =>
+                      setSelectedStatuses(prev => ({
+                        ...prev,
+                        [shipment.shipment_id]: e.target.value
+                      }))
+                    }
+                  >
                     <option value="" disabled>
                       Selecciona el estado
                     </option>
-                    <option value="">En tránsito</option>
-                    <option value="">Entregado</option>
+                    {
+                      status
+                        ?.filter(s => s.statusName !== shipment.status_name)
+                        .map(s => (
+                          <option key={s.statusId} value={s.statusId}>
+                            {s.statusName}
+                          </option>
+                        ))
+                    }
                   </select>
                 </div>
               </div>
