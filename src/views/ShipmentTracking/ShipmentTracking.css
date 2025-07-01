@@ -1,0 +1,37 @@
+.shipment-tracking {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10rem;
+}
+
+.shipment-tracking__container {
+  width: 100%;
+  min-height: 50%;
+  background-color: var(--color2);
+  border-radius: 1.5rem;
+}
+
+.shipment-tracking__item {
+  font-family: var(--font-main);
+  display: grid;
+  grid-template-columns: 10% 30% 15% 15% 15% 15%;
+  border: solid 0.3rem var(--color5);
+  border-radius: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  margin: 1.5rem 0.5rem;
+}
+
+.shipment-tracking__item--centered {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.shipment-tracking__status-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

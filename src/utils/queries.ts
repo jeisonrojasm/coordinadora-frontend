@@ -58,3 +58,19 @@ export const createShipment = (
     setModalMessage
   })
 }
+
+export const getUserShipments = (
+  userId: string,
+  token: string,
+  handleShow?: () => void,
+  setModalMessage?: (msg: string) => void
+) => {
+  return request({
+    method: 'GET',
+    endpoint: `/shipment/findAll/user/${userId}`,
+    body: undefined,
+    token,
+    handleShow,
+    setModalMessage
+  })
+}
