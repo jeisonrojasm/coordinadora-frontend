@@ -4,9 +4,11 @@
 
 # Coordinadora Frontend
 
-Aplicación React para registrar, cotizar y rastrear envíos.
+Web interface built with React and Material UI for quoting, creating, and tracking shipments in real time. The app uses JWT for authentication, Context API for global state management, and WebSockets to provide dynamic updates on shipment statuses.
 
-## Tecnologías
+> ⚠️ **Note: The frontend requires the [*coordinadora-backend*](https://github.com/jeisonrojasm/coordinadora-backend) application to be running in order to make API requests.**
+
+## 🛠️ Built with
 
 - React + Vite
 - TypeScript
@@ -15,47 +17,47 @@ Aplicación React para registrar, cotizar y rastrear envíos.
 - Socket.io-client
 - JWT + localStorage
 
-## ✅ Prerrequisitos
+## ✅ Prerequisites
 
-Antes de comenzar, asegúrate de tener instalado lo siguiente:
+Before getting started, make sure you have the following installed:
 
 - ✅ [*Git*](https://git-scm.com/)
-- ✅ [*Docker* y Docker Compose](https://www.docker.com/get-started) instalados y en ejecución
+- ✅ [*Docker* y Docker Compose](https://www.docker.com/get-started) installed and running
 
-## 📥 Obtener el proyecto
+## 📥 Get the project
 
-Clona el repositorio:
+Clone the repository:
 
 ```bash
-#Clona el repositorio
+#Clone the repository:
 git clone https://github.com/jeisonrojasm/coordinadora-frontend.git
 cd coordinadora-frontend
 ```
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-El frontend de Coordinadora está construido con React + TypeScript, y sigue una estructura modular y escalable. Se utiliza Vite como bundler, junto con buenas prácticas para facilitar el mantenimiento, pruebas y reutilización de componentes.
+The Coordinadora frontend is built with React + TypeScript and follows a modular, scalable structure. Vite is used as the bundler, along with best practices to facilitate maintenance, testing, and component reusability.
 
 ```bash
 coordinadora-frontend/
-├── public/                  # Archivos públicos (favicon, index.html)
-├── src/                     # Código fuente del frontend
-│   ├── components/          # Componentes reutilizables de UI
-│   │   └── Button/          # Ejemplo de componente atómico
+├── public/                  # Public files (favicon, index.html)
+├── src/                     # Frontend source code
+│   ├── components/          # Reusable UI components
+│   │   └── Button/          # Example of an atomic component
 │   │       ├── Button.tsx
 │   │       ├── Button.css
 │   │       ├── ButtonTypes.ts
 │   │       └── Button.test.tsx
-│   ├── context/             # Contextos globales (ej. autenticación, estado de usuario)
+│   ├── context/             # Global contexts (e.g., authentication, user state)
 │   │   ├── DataContext.tsx
 │   │   └── DataTypes.ts
-│   ├── hooks/               # Hooks personalizados reutilizables
+│   ├── hooks/               # Reusable custom hooks
 │   │   └── useModal.ts
-│   ├── utils/               # Funciones utilitarias y esquemas
+│   ├── utils/               # Utility functions and schemas
 │   │   ├── functions.ts
-│   │   ├── queries.ts        # Funciones que consumen la API del backend
+│   │   ├── queries.ts        # Functions that consume the backend API
 │   │   └── global-schemas.ts
-│   ├── views/               # Vistas de páginas (agrupadas por ruta o flujo)
+│   ├── views/               # Page views (grouped by route or flow)
 │   │   └── SignIn/
 │   │       ├── SignIn.tsx
 │   │       ├── SignIn.css
@@ -63,120 +65,120 @@ coordinadora-frontend/
 │   │       ├── SignInTypes.ts
 │   │       ├── SignInSchemas.ts
 │   │       └── SignIn.test.tsx
-│   ├── App.tsx              # Componente raíz de la app
-│   ├── App.css              # Estilos globales de la app
-│   ├── main.tsx             # Punto de entrada principal
-│   └── index.css            # Estilos base/globales
-├── .env                     # Variables de entorno para desarrollo (no versionado)
-├── .gitignore               # Archivos y carpetas ignoradas por Git
-├── .dockerignore            # Archivos ignorados por Docker
-├── Dockerfile               # Imagen de frontend para producción
-├── docker-compose.yml       # Orquestación local de frontend y backend
-├── index.html               # Archivo base HTML (usado por Vite)
-├── package.json             # Dependencias y scripts
-├── tsconfig.json            # Configuración de TypeScript
-└── README.md                # Documentación del proyecto
+│   ├── App.tsx              # Root component of the app
+│   ├── App.css              # Global styles of the app
+│   ├── main.tsx             # Main entry point
+│   └── index.css            # Base/global styles
+├── .env                     # Environment variables for development (not versioned)
+├── .gitignore               # Files and folders ignored by Git
+├── .dockerignore            # Files ignored by Docker
+├── Dockerfile               # Frontend production image
+├── docker-compose.yml       # Local orchestration of frontend and backend
+├── index.html               # Base HTML file (used by Vite)
+├── package.json             # Dependencies and scripts
+├── tsconfig.json            # TypeScript configuration
+└── README.md                # Project documentation
 ```
 
-### 🧱 Convenciones por módulo
+### 🧱 Module conventions
 
-Cada módulo en `views/` y `components/` sigue un patrón de separación por archivo para mantener una arquitectura limpia y escalable:
+Each module in `views/` and `components/` follows a file-based separation pattern to maintain a clean and scalable architecture:
 
-| Archivo           | Propósito                                                     |
+| File              | Purpose                                                       |
 |-------------------|---------------------------------------------------------------|
-| `*.tsx`           | Componente principal (vista o UI reusable)                    |
-| `*.css`           | Estilos específicos del componente o vista                    |
-| `*Types.ts`       | Tipado de props, estados y estructuras del componente         |
-| `*Functions.ts`   | Funciones auxiliares específicas del módulo                   |
-| `*Schemas.ts`     | Validaciones con Zod u otras librerías para formularios       |
-| `*.test.tsx`      | Pruebas unitarias usando Jest y React Testing Library         |
+| `*.tsx`           | Main component (view or reusable UI)                          |
+| `*.css`           | Component- or view-specific styles                            |
+| `*Types.ts`       | Typing of component props, state, and structures              |
+| `*Functions.ts`   | Module-specific helper functions                              |
+| `*Schemas.ts`     | Form validations with Zod or other libraries                  |
+| `*.test.tsx`      | Unit tests using Jest and React Testing Library               |
 
-## 🚀 Ejecutar
+## 🚀 Run
 
-### 1. **Archivo `.env` requerido**
+### 1. **`.env` file required**
 
-El archivo `.env` contiene variables necesarias para el correcto funcionamiento del proyecto frontend, como la URL base del backend.
+Normally, the `.env` file **should not be included** in a public repository, as it may contain sensitive configuration values.
+However, for demonstration and evaluation purposes —and because this is not a production project— the `.env` file is included in the repository so anyone can run the project without additional setup.
 
-Por seguridad y buenas prácticas, **este archivo no está incluido en el repositorio**.
+You will find the `.env` file already placed in the root of the project.
 
-> 🔐 **En el correo que te llegó encontrarás el archivo `.env` necesario para ejecutar el frontend correctamente.**
+### 2. Set up the development environment with Docker
 
-Una vez lo tengas, colócalo en la raíz del proyecto.
-
-### 2. Levantar el entorno de desarrollo con Docker
-
-Como esta aplicación está completamente dockerizada, no es necesario instalar Node.js, Vite ni dependencias manualmente en tu equipo. Basta con ejecutar el siguiente comando desde la raíz del proyecto para construir la imagen y levantar el contenedor del frontend:
+Since this application is fully dockerized, there is no need to manually install Node.js, Vite, or dependencies on your machine. Simply run the following command from the project root to build the image and start the frontend container:
 
 ```bash
 docker-compose up --build
 ```
 
-Este comando realizará las siguientes acciones:
+This command will perform the following actions:
 
-- Construirá la imagen de Docker definida en el `Dockerfile`, utilizando `node:20-alpine` como base.
-- Instalará automáticamente todas las dependencias declaradas en el `package.json`.
-- Montará el código fuente de tu máquina dentro del contenedor, lo que permite ver los cambios en tiempo real.
-- Iniciará el servidor de desarrollo de Vite con soporte para hot-reload, permitiendo actualizar la interfaz automáticamente ante cualquier cambio en los archivos `.tsx` o `.ts`.
+- It will build the Docker image defined in the `Dockerfile`, using `node:20-alpine` as the base.
+- It will automatically install all dependencies declared in the `package.json`.
+- It will mount the source code from your machine into the container, allowing you to see changes in real time.
+- It will start the Vite development server with hot-reload support, allowing the interface to automatically update whenever any `.tsx` or `.ts` files change.
 
-## ✅ Aplicación lista para usarse
+## ✅ Application ready to use
 
-Una vez completados los pasos anteriores:
+Once the previous steps are completed:
 
-- La aplicación frontend estará corriendo en [`http://localhost:5173/`](http://localhost:5173/).
-- Ya se habrá establecido la conexión con el backend a través de la variable `VITE_HOST`.
-- Podrás iniciar sesión, crear cotizaciones, registrar envíos y realizar seguimiento en tiempo real.
-- El sistema de actualización por sockets estará activo y funcional.
+- The frontend application will be running at [`http://localhost:5173/`](http://localhost:5173/).
+- The connection to the backend will already be established through the variable `VITE_HOST`.
+- You will be able to log in, create quotes, register shipments, and track them in real time.
+- The socket-based update system will be active and functional.
 
-> 🧪 Puedes acceder desde tu navegador a `http://localhost:5173/` y comenzar a interactuar con la interfaz.
+> 🧪 You can access `http://localhost:5173/` from your browser and start interacting with the interface.
 
-## 🧪 Pruebas automatizadas
+## 🧪 Automated tests
 
-El proyecto incluye pruebas unitarias para componentes y vistas, utilizando [Jest](https://jestjs.io/) junto con [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). Estas pruebas garantizan que los componentes de la interfaz se comporten correctamente frente a diferentes escenarios.
+The project includes unit tests for components and views, using [Jest](https://jestjs.io/) along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). These tests ensure that the interface components behave correctly under different scenarios.
 
-### Estructura de pruebas
+### Test structure
 
-Las pruebas están organizadas en los mismos directorios que los componentes y vistas correspondientes:
+The tests are organized in the same directories as their corresponding components and views:
 
 ```bash
 src/
 ├── components/
 │   └── Button/
 │       ├── Button.tsx
-│       └── Button.test.tsx       👈 Pruebas del botón reutilizable
+│       └── Button.test.tsx       👈 Reusable button tests
 
 ├── views/
 │   └── SignIn/
 │       ├── SignIn.tsx
-│       └── SignIn.test.tsx       👈 Pruebas de la vista de inicio de sesión
+│       └── SignIn.test.tsx       👈 Login view tests
 ```
 
-Cada archivo `*.test.tsx` contiene pruebas enfocadas en:
+Each `*.test.tsx` file contains tests focused on:
 
-- Validar el renderizado correcto de los elementos.
-- Comprobar interacciones como clics o envíos de formularios.
-- Verificar condiciones de accesibilidad (como elementos deshabilitados).
-- Asegurar que se disparen funciones asociadas (onClick, onChange, etc.).
+- Validate the correct rendering of elements.
+- Check interactions such as clicks or form submissions.
+- Verify accessibility conditions (e.g., disabled elements).
+- Ensure that associated functions are triggered (onClick, onChange, etc.).
 
-Ejemplo básico:
+Basic example:
 
 ```tsx
-test('debe renderizar el texto correctamente', () => {
+test('should render the text correctly', () => {
   render(<Button text="Enviar" />)
-  const button = screen.getByRole('button', { name: 'Enviar' })
+  const button = screen.getByRole('button', { name: 'Send' })
   expect(button).toBeInTheDocument()
 })
 ```
 
-### Ejecutar los tests
+### Run the tests
 
-Para correr todas las pruebas:
+To run all tests:
 
 ```bash
 npm run test
 ```
 
-> 📦 Asegúrate de tener instaladas las dependencias de desarrollo (`jest`, `@testing-library/react`, `@testing-library/jest-dom`) antes de ejecutar los tests.
+> 📦 Make sure to have the development dependencies (`jest`, `@testing-library/react`, `@testing-library/jest-dom`) installed before running the tests.
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-Desarrollado por **Jeison Rojas** - *Desarrollador Fullstack* - [jeisonrojasm](https://github.com/jeisonrojasm)
+Developed by **Jeison Rojas Mora** - *Fullstack Developer*
+
+- [https://github.com/jeisonrojasm](https://github.com/jeisonrojasm)
+- [https://www.linkedin.com/in/jeison-rojas-mora/](https://www.linkedin.com/in/jeison-rojas-mora/)
